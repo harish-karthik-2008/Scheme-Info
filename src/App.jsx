@@ -733,6 +733,185 @@ const ALL_SCHEMES = [
     check: f => (f.bplCard || parseInt(f.annualIncome||0)<=200000) && !f.ownHouse && (f.category==="SC"||f.category==="ST"),
     eligibilityNote:"SC/ST low-income rural households without homes have priority for rural housing assistance."
   },
+  {
+  id:"magalir_urimai",
+  name:"Kalaignar Magalir Urimai Thogai",
+  ministry:"Department of Social Welfare and Women Empowerment, Tamil Nadu",
+  category:"Women & Child",
+  level:"Tamil Nadu",
+  benefit:"₹1,000 per month financial assistance for eligible women heads of families.",
+  howToApply:"Apply through e-Sevai centres or designated government camps.",
+  officialLink:"https://www.tn.gov.in",
+  check: f =>
+    isFemale(f) &&
+    parseInt(f.age)>=21 &&
+    parseInt(f.annualIncome||0)<=250000,
+  eligibilityNote:"Eligible women heads of households receive ₹1,000 every month."
+},
+
+{
+  id:"pudhumaipenn",
+  name:"Pudhumai Penn Scheme",
+  ministry:"Higher Education Department, Tamil Nadu",
+  category:"Education",
+  level:"Tamil Nadu",
+  benefit:"₹1,000 per month for girls from government schools pursuing higher education.",
+  howToApply:"Apply through educational institutions.",
+  officialLink:"https://www.tn.gov.in",
+  check: f =>
+    isFemale(f) &&
+    isStudent(f) &&
+    ["Undergraduate","Postgraduate"].includes(f.education),
+  eligibilityNote:"Girl students pursuing higher education receive ₹1,000 per month."
+},
+
+{
+  id:"tamil_pudhalvan",
+  name:"Tamil Pudhalvan Scheme",
+  ministry:"Higher Education Department, Tamil Nadu",
+  category:"Education",
+  level:"Tamil Nadu",
+  benefit:"₹1,000 per month for eligible male students pursuing higher education.",
+  howToApply:"Apply through educational institutions.",
+  officialLink:"https://www.tn.gov.in",
+  check: f =>
+    f.gender==="Male" &&
+    isStudent(f) &&
+    ["Undergraduate","Postgraduate"].includes(f.education),
+  eligibilityNote:"Male students pursuing higher education receive monthly financial assistance."
+},
+
+{
+  id:"naan_mudhalvan",
+  name:"Naan Mudhalvan",
+  ministry:"Skill Development Department, Tamil Nadu",
+  category:"Skill Development",
+  level:"Tamil Nadu",
+  benefit:"Free skill training, career guidance and placement support.",
+  howToApply:"Register through Naan Mudhalvan portal.",
+  officialLink:"https://www.naanmudhalvan.tn.gov.in",
+  check: f =>
+    parseInt(f.age)>=15 &&
+    parseInt(f.age)<=35,
+  eligibilityNote:"Youth can access free skill development and placement support."
+},
+
+{
+  id:"cm_breakfast",
+  name:"Chief Minister Breakfast Scheme",
+  ministry:"School Education Department, Tamil Nadu",
+  category:"Education",
+  level:"Tamil Nadu",
+  benefit:"Free nutritious breakfast for primary school students.",
+  howToApply:"Automatic for students studying in eligible government schools.",
+  officialLink:"https://www.tn.gov.in",
+  check: f =>
+    isStudent(f) &&
+    parseInt(f.age)>=5 &&
+    parseInt(f.age)<=12,
+  eligibilityNote:"Government school students receive free breakfast."
+},
+
+{
+  id:"cm_health",
+  name:"Chief Minister Comprehensive Health Insurance Scheme",
+  ministry:"Health Department, Tamil Nadu",
+  category:"Health",
+  level:"Tamil Nadu",
+  benefit:"Cashless medical treatment up to specified limits in empanelled hospitals.",
+  howToApply:"Apply through ration card and family details verification.",
+  officialLink:"https://www.cmchistn.com",
+  check: f =>
+    parseInt(f.annualIncome||0)<=300000 ||
+    f.bplCard,
+  eligibilityNote:"Low-income families are eligible for cashless treatment."
+},
+
+{
+  id:"free_bus",
+  name:"Vidiyal Payanam - Free Bus Travel for Women",
+  ministry:"Transport Department, Tamil Nadu",
+  category:"Women & Child",
+  level:"Tamil Nadu",
+  benefit:"Free travel in government-operated ordinary town buses.",
+  howToApply:"No registration required.",
+  officialLink:"https://www.tn.gov.in",
+  check: f =>
+    isFemale(f),
+  eligibilityNote:"Women can travel free in eligible government buses."
+},
+
+{
+  id:"kanavu_illam",
+  name:"Kalaignar Kanavu Illam Thittam",
+  ministry:"Rural Development Department, Tamil Nadu",
+  category:"Housing",
+  level:"Tamil Nadu",
+  benefit:"Financial assistance for construction of permanent houses.",
+  howToApply:"Apply through local body offices.",
+  officialLink:"https://www.tn.gov.in",
+  check: f =>
+    !f.ownHouse &&
+    parseInt(f.annualIncome||0)<=300000,
+  eligibilityNote:"Low-income families without permanent houses are eligible."
+},
+
+{
+  id:"uzhavar_pathukappu",
+  name:"Tamil Nadu Uzhavar Pathukappu Thittam",
+  ministry:"Agriculture Department, Tamil Nadu",
+  category:"Agriculture",
+  level:"Tamil Nadu",
+  benefit:"Social security, education support and financial assistance for farmers.",
+  howToApply:"Register through Agriculture Department.",
+  officialLink:"https://www.tn.gov.in",
+  check: f =>
+    isFarmerProfile(f),
+  eligibilityNote:"Registered farmers receive welfare and social security benefits."
+},
+
+{
+  id:"kaivinai",
+  name:"Kalaignar Kaivinai Thittam",
+  ministry:"MSME Department, Tamil Nadu",
+  category:"Skill Development",
+  level:"Tamil Nadu",
+  benefit:"Subsidized loans and support for artisans and craftspeople.",
+  howToApply:"Apply through district industries centres.",
+  officialLink:"https://www.tn.gov.in",
+  check: f =>
+    isArtisanOccupation(f),
+  eligibilityNote:"Traditional artisans are eligible for financial assistance and training."
+},
+
+{
+  id:"widow_pension_tn",
+  name:"Tamil Nadu Widow Pension Scheme",
+  ministry:"Social Welfare Department, Tamil Nadu",
+  category:"Social Security",
+  level:"Tamil Nadu",
+  benefit:"Monthly pension for eligible widows.",
+  howToApply:"Apply through e-Sevai centres.",
+  officialLink:"https://www.tn.gov.in",
+  check: f =>
+    isFemale(f) &&
+    f.isWidow,
+  eligibilityNote:"Widows are eligible for monthly pension support."
+},
+
+{
+  id:"old_age_pension_tn",
+  name:"Tamil Nadu Old Age Pension Scheme",
+  ministry:"Social Welfare Department, Tamil Nadu",
+  category:"Social Security",
+  level:"Tamil Nadu",
+  benefit:"Monthly pension for senior citizens.",
+  howToApply:"Apply through local revenue offices.",
+  officialLink:"https://www.tn.gov.in",
+  check: f =>
+    parseInt(f.age)>=60,
+  eligibilityNote:"Senior citizens are eligible for monthly pension assistance."
+},
 ];
 
 // ─── Helper functions ───────────────────────────────────────────────────────
